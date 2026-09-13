@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    groups:
+      actions: { patterns: ["*"] }
+# Add one block per package ecosystem the repo uses (npm, pip, cargo, docker).
+# Majors are a scheduled pass, not something to chase mid-phase:
+#    ignore:
+#      - dependency-name: "*"
+#        update-types: ["version-update:semver-major"]
