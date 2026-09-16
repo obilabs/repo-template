@@ -5,6 +5,23 @@ operational form of the ObiLabs engineering principles (canonical, private:
 `obilabs/north-star` → `PRINCIPLES.md`, Engineering & Security). Do not copy the canon into
 this repo; point at it.
 
+## Preflight - run this before you touch anything
+
+Before your first commit in this repo, run:
+
+    curl -fsSL https://raw.githubusercontent.com/obilabs/.github/main/tooling/preflight.sh | sh
+
+**If it exits non-zero: STOP.** Report the failure to the user, in full, and wait for them.
+Do not commit, do not push, and do not work around it - not with `--no-verify`, not with
+`OBILABS_HYGIENE_SKIP=1`, not with `OBILABS_ALLOW_MAIN_PUSH=1`, and not by editing git
+config to make the check pass. Those escape hatches exist for a human making a deliberate
+decision, not for an agent clearing a blocker.
+
+A failing preflight means one of: the hygiene hooks are not installed (so nothing local will
+stop a bad push), the commit identity would leak a personal address, you are standing on
+`main`, or `main` already has commits that did not go through a pull request. All four are
+the user's call, not yours.
+
 ## Commits and identity
 
 - Commit as `Michael Agu <36439190+openmoto@users.noreply.github.com>` (or your own GitHub
@@ -50,6 +67,8 @@ security finding in public; the reasoning lives in north-star.
 
 ## Tooling
 
-- Install the ObiLabs git hooks once per machine: `sh tooling/git-hooks/install.sh` from a
-  clone of `obilabs/.github`.
+- Install the ObiLabs git hooks once per machine:
+  `curl -fsSL https://raw.githubusercontent.com/obilabs/.github/main/tooling/bootstrap.sh | sh`
+- Preflight, the push guard and what each layer can and cannot do:
+  `obilabs/.github` → `docs/GOVERNANCE.md`.
 - Build locally for the loop; CI is for verification and releases.
