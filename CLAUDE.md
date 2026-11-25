@@ -59,6 +59,15 @@ push and pull request.
 - **Honest status codes:** a failure never returns HTTP 200 with `success: false`.
 - **Under-promise:** README and UI copy describe what works today; AI features are optional
   enhancements, never the engine.
+- **Colours come from theme tokens:** a theme is one block of colour values in one file, and
+  it only reaches styles that read those values. No colour literal (hex, `rgb()`, a named
+  colour) in a component or page stylesheet, or in inline styles; use the token. Colours are
+  defined only in the token and theme files. If the token you need does not exist, add it
+  there, with a value for every theme, then use it. Exceptions are content that must look
+  the same in every theme (a theme swatch, an email or print preview), each with a comment
+  saying so. **Enforce with a CI check** that fails when a stylesheet gains a colour literal;
+  where a repo already has some, record the count per file in a baseline that can only go
+  down. A new page is checked in the light theme and one dark theme before it is called done.
 
 ## Public repositories
 
